@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Proyecto.Entities
 {
+    [Table("PersonPhone", Schema = "Person")]
     public class PersonPhone
     {
         [Key] public int ProductID { get; set; }

@@ -1,5 +1,6 @@
 using Proyecto.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 //using SgbdWebApi Data;
 
@@ -12,19 +13,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddDbContext<AddDbContext>(options =>
+//options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks")));
+
 builder.Services.AddDbContext<AddDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks")));
-
-/*builder.Services.AddDbContext<AddDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks"),
-    sqlServerOprionsAction: SqlCompareOptions => {
-
-        SqlOptions.EnableRetryOnFailure(
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+    sqlServerOptionsAction: sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(
             maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(38),
+            maxRetryDelay: TimeSpan.FromSeconds(30),
             errorNumbersToAdd: null);
-    
-    }));*/
+    }));
+//builder.Services.AddScoped<IPersonPhoneRepository>.PersonPhoneRepository();
 
 var app = builder.Build();
 

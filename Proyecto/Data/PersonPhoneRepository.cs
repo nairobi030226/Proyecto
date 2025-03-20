@@ -1,14 +1,23 @@
-﻿/*using Proyecto.Entities;
-//using Proyecto.Entities.PersonPhone;
+﻿using Proyecto.Entities;
 using Proyecto.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Proyecto.Data
 {
     public class PersonPhoneRepository : IPersonPhoneRepository
     {
         private readonly AddDbContext _context;
+
+        public PersonPhoneRepository(AddDbContext context) //AppDbContext?
+        {
+            _context = context;
+        }
+
+        //public async Task<Customer> GetCustomerByIdAsync(int id) => await _context.Customer.FindAsync(id);
+
+
+        public async Task<IEnumerable<PersonPhone>> GetCustomersAsync() => await _context.PersonPhone.Take(100).ToListAsync();
+        /*private readonly AddDbContext _context;
 
         public PersonPhoneRepository(AddDbContext context) { 
             _context = context;
@@ -23,9 +32,6 @@ namespace Proyecto.Data
 
            return PersonPhone;
         }
-        
-            
-        
-    
+    }*/
     }
-}¨*/
+}
