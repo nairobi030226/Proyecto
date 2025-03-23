@@ -13,10 +13,24 @@ namespace Proyecto.Data
             _context = context;
         }
 
-        //public async Task<Customer> GetCustomerByIdAsync(int id) => await _context.Customer.FindAsync(id);
+        //public async Task<PersonPhone> GetCustomerByIdAsync(int id) => await _context.PersonPhone.FindAsync(id);
 
 
-        public async Task<IEnumerable<PersonPhone>> GetCustomersAsync() => await _context.PersonPhone.Take(100).ToListAsync();
+        public async Task<IEnumerable<PersonPhone>> GetCustomersAsync()
+        {
+            var result = new List<PersonPhone> ();
+            try
+            {
+                result = await _context.PersonPhone.Take(100).ToListAsync();
+            }
+            catch (Exception ex) {
+                //Console.WriteLine(ex.ToString());
+                Console.WriteLine($"Error al obtener los datos: {ex.Message}");
+                throw; // Esto permite ver el error en la respuesta HTTP
+            }
+            return result;
+            
+        }
         /*private readonly AddDbContext _context;
 
         public PersonPhoneRepository(AddDbContext context) { 
@@ -33,5 +47,7 @@ namespace Proyecto.Data
            return PersonPhone;
         }
     }*/
+
+
     }
 }

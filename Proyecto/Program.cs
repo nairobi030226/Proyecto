@@ -1,6 +1,7 @@
 using Proyecto.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Proyecto.Interface;
 
 //using SgbdWebApi Data;
 
@@ -25,7 +26,7 @@ builder.Services.AddDbContext<AddDbContext>(options =>
             maxRetryDelay: TimeSpan.FromSeconds(30),
             errorNumbersToAdd: null);
     }));
-//builder.Services.AddScoped<IPersonPhoneRepository>.PersonPhoneRepository();
+builder.Services.AddScoped<IPersonPhoneRepository,PersonPhoneRepository>();
 
 var app = builder.Build();
 
