@@ -64,7 +64,19 @@ namespace Proyecto.Controllers
 
             return NoContent(); // Retorna 204 si la actualización fue exitosa
         }
+        // MÉTODO PARA ELIMINAR UN TELÉFONO POR SU ID
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePersonPhone(int id)
+        {
+            var success = await _repository.DeletePersonPhoneByIdAsync(id);
 
+            if (!success)
+            {
+                return NotFound(new { message = "Teléfono no encontrado." }); // Si no se encontró el teléfono, devuelve un error 404
+            }
+
+            return NoContent(); // Si el teléfono fue eliminado con éxito, devuelve un 204 No Content
+        }
     }
 
 }
