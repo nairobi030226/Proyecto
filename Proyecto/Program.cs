@@ -2,6 +2,9 @@ using Proyecto.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Proyecto.Interface;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Proyecto.Application;
 //using SgbdWebApi Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,8 +33,11 @@ builder.Services.AddDbContext<AddDbContext>(options =>
     }));
 // Registra la implementación del repositorio para inyección de dependencias
 builder.Services.AddScoped<IPersonPhoneRepository,PersonPhoneRepository>();
-
+builder.Services.AddScoped<IPersonPhoneOperation, PersonPhoneOperation>();
 var app = builder.Build();
+
+
+
 
 // Configuración del pipeline de la aplicación
 if (app.Environment.IsDevelopment()) // Si está en modo desarrollo
